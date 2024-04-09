@@ -389,6 +389,22 @@ namespace Microsoft.Azure.NotificationHubs
         /// <param name="jsonPayload">This is a valid Apple Push Notification Service (APNS) payload.
         /// Documentation on the APNS payload can be found
         /// <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification">here</a>.</param>
+        /// <param name="apnsHeaders">The APNS headers.</param>
+        /// <param name="tagExpression">A tag expression is any boolean expression constructed using the logical operators AND (&amp;&amp;), OR (||), NOT (!), and round parentheses. For example: (A || B) &amp;&amp; !C. If an expression uses only ORs, it can contain at most 20 tags. Other expressions are limited to 6 tags. Note that a single tag "A" is a valid expression.</param>
+        /// <returns>
+        ///   <see cref="Microsoft.Azure.NotificationHubs.NotificationOutcome" /> which describes the result of the Send operation.
+        /// </returns>
+        public Task<NotificationOutcome> SendAppleNativeNotificationAsync(string jsonPayload, IDictionary<string, string> apnsHeaders, string tagExpression)
+        {
+            return SendNotificationAsync(new AppleNotification(jsonPayload, apnsHeaders), tagExpression);
+        }
+
+        /// <summary>
+        /// Asynchronously sends an Apple native notification to a tag expression (a single tag "tag" is a valid tag expression). To specify an expiry, use the <see cref="M:Microsoft.Azure.NotificationHubs.NotificationHubClient.SendNotificationAsync(Microsoft.Azure.NotificationHubs.Notification)" /> method.
+        /// </summary>
+        /// <param name="jsonPayload">This is a valid Apple Push Notification Service (APNS) payload.
+        /// Documentation on the APNS payload can be found
+        /// <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification">here</a>.</param>
         /// <param name="tagExpression">A tag expression is any boolean expression constructed using the logical operators AND (&amp;&amp;), OR (||), NOT (!), and round parentheses. For example: (A || B) &amp;&amp; !C. If an expression uses only ORs, it can contain at most 20 tags. Other expressions are limited to 6 tags. Note that a single tag "A" is a valid expression.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for a task to complete.</param>
         /// <returns>
@@ -397,6 +413,23 @@ namespace Microsoft.Azure.NotificationHubs
         public Task<NotificationOutcome> SendAppleNativeNotificationAsync(string jsonPayload, string tagExpression, CancellationToken cancellationToken)
         {
             return SendNotificationAsync(new AppleNotification(jsonPayload), tagExpression, cancellationToken);
+        }
+
+        /// <summary>
+        /// Asynchronously sends an Apple native notification to a tag expression (a single tag "tag" is a valid tag expression). To specify an expiry, use the <see cref="M:Microsoft.Azure.NotificationHubs.NotificationHubClient.SendNotificationAsync(Microsoft.Azure.NotificationHubs.Notification)" /> method.
+        /// </summary>
+        /// <param name="jsonPayload">This is a valid Apple Push Notification Service (APNS) payload.
+        /// Documentation on the APNS payload can be found
+        /// <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification">here</a>.</param>
+        /// <param name="apnsHeaders">The APNS headers.</param>
+        /// <param name="tagExpression">A tag expression is any boolean expression constructed using the logical operators AND (&amp;&amp;), OR (||), NOT (!), and round parentheses. For example: (A || B) &amp;&amp; !C. If an expression uses only ORs, it can contain at most 20 tags. Other expressions are limited to 6 tags. Note that a single tag "A" is a valid expression.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for a task to complete.</param>
+        /// <returns>
+        ///   <see cref="Microsoft.Azure.NotificationHubs.NotificationOutcome" /> which describes the result of the Send operation.
+        /// </returns>
+        public Task<NotificationOutcome> SendAppleNativeNotificationAsync(string jsonPayload, IDictionary<string, string> apnsHeaders, string tagExpression, CancellationToken cancellationToken)
+        {
+            return SendNotificationAsync(new AppleNotification(jsonPayload, apnsHeaders), tagExpression, cancellationToken);
         }
 
         /// <summary>
@@ -420,6 +453,22 @@ namespace Microsoft.Azure.NotificationHubs
         /// <param name="jsonPayload">This is a valid Apple Push Notification Service (APNS) payload.
         /// Documentation on the APNS payload can be found
         /// <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification">here</a>.</param>
+        /// <param name="apnsHeaders">The APNS headers.</param>
+        /// <param name="tags">A non-empty set of tags (maximum 20 tags). Each string in the set can contain a single tag.</param>
+        /// <returns>
+        ///   <see cref="Microsoft.Azure.NotificationHubs.NotificationOutcome" /> which describes the result of the Send operation.
+        /// </returns>
+        public Task<NotificationOutcome> SendAppleNativeNotificationAsync(string jsonPayload, IDictionary<string, string> apnsHeaders, IEnumerable<string> tags)
+        {
+            return SendNotificationAsync(new AppleNotification(jsonPayload, apnsHeaders), tags);
+        }
+
+        /// <summary>
+        /// Asynchronously sends an Apple native notification to a non-empty set of tags (maximum 20). This is equivalent to a tagged expression with boolean ORs ("||"). To specify an expiry, use the <see cref="M:Microsoft.Azure.NotificationHubs.NotificationHubClient.SendNotificationAsync(Microsoft.Azure.NotificationHubs.Notification)" /> method.
+        /// </summary>
+        /// <param name="jsonPayload">This is a valid Apple Push Notification Service (APNS) payload.
+        /// Documentation on the APNS payload can be found
+        /// <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification">here</a>.</param>
         /// <param name="tags">A non-empty set of tags (maximum 20 tags). Each string in the set can contain a single tag.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for a task to complete.</param>
         /// <returns>
@@ -428,6 +477,23 @@ namespace Microsoft.Azure.NotificationHubs
         public Task<NotificationOutcome> SendAppleNativeNotificationAsync(string jsonPayload, IEnumerable<string> tags, CancellationToken cancellationToken)
         {
             return SendNotificationAsync(new AppleNotification(jsonPayload), tags, cancellationToken);
+        }
+
+        /// <summary>
+        /// Asynchronously sends an Apple native notification to a non-empty set of tags (maximum 20). This is equivalent to a tagged expression with boolean ORs ("||"). To specify an expiry, use the <see cref="M:Microsoft.Azure.NotificationHubs.NotificationHubClient.SendNotificationAsync(Microsoft.Azure.NotificationHubs.Notification)" /> method.
+        /// </summary>
+        /// <param name="jsonPayload">This is a valid Apple Push Notification Service (APNS) payload.
+        /// Documentation on the APNS payload can be found
+        /// <a href="https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification">here</a>.</param>
+        /// <param name="apnsHeaders">The APNS headers.</param>
+        /// <param name="tags">A non-empty set of tags (maximum 20 tags). Each string in the set can contain a single tag.</param>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for a task to complete.</param>
+        /// <returns>
+        ///   <see cref="Microsoft.Azure.NotificationHubs.NotificationOutcome" /> which describes the result of the Send operation.
+        /// </returns>
+        public Task<NotificationOutcome> SendAppleNativeNotificationAsync(string jsonPayload, IDictionary<string, string> apnsHeaders, IEnumerable<string> tags, CancellationToken cancellationToken)
+        {
+            return SendNotificationAsync(new AppleNotification(jsonPayload, apnsHeaders), tags, cancellationToken);
         }
 
         /// <summary>
